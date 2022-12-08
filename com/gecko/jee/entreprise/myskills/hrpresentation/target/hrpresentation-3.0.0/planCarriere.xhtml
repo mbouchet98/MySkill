@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+  <title>Plan de carrière</title>
+  <!-- On doit rajouter ces include pour que le calendrier puisse fonctionner -->
+	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+	<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
+	
+</h:head>
+<h:body>
+	<h:form id="formPlanCarriere">
+		<h1>#{planCarriereController.mskuser.firstName} #{planCarriereController.mskuser.lastName}</h1>
+		
+		<p:outputLabel id="planCarriereId" value="Liste d'un plans de carrière :  " style="font-size:1.5em;" />
+		<p:toolbar>
+			<p:toolbarGroup>
+				<p:commandButton value="Ajouter un nouveau plan de carriere à la liste" action="#{planCarriereController.viderChampsPlanCarriere}"
+						update="formPlanCarriere:dialogPlanCarriere" process="@this"
+						oncomplete="PF('popUpPlanCarriere').show();"/>
+						<p:commandButton value="Ajouter un plan de carriere éxistant à la liste"
+						update="formPlanCarriere:dialogPlanCarriereExistant" process="@this"
+						oncomplete="PF('popUpPlanCarriereExistant').show();"/>
+			</p:toolbarGroup>
+		</p:toolbar>
+		<p:dataTable id="planCarrieres" var="planCarriere" value="#{planCarriereForm.planCarrieres}" rowKey="#{planCarriere.idPlanCarriere}" paginator="true"
+		                  rows="10" rowSelectMode="add" paginatorPosition="bottom">
+			<p:column headerText="Description">
+				<h:outputText value="#{planCarriere.description}" />
+			</p:column>
+			<p:column headerText="Nom limite">
+				<h:outputText value="#{planCarriere.nom}" />
+			</p:column>
+			<p:column exportable="false">
+				<p:commandButton value="Modifier"/>
+				<p:commandButton value="Supprimer" />
+			</p:column>
+		</p:dataTable>
+		
+		<p:dialog header="Plan de Carriere"
+				widgetVar="popUpPlanCarriere" minHeight="500" minWidth="500"
+				showEffect="fade" modal="true" id="dialogPlanCarriere">
+				<p:panelGrid id="eventDetails" columns="2">
+					<!-- <p:outputLabel for="NomPlanCarriere" value="Nom : " />
+					<p:inputText id="NomPlanCarriere"
+						value="#{planCarriereForm.textInputPlanCarriereNom}" />
+
+					<p:outputLabel for="DescritionPlanCarriere" value="Description : " />
+					<p:inputText id="DescritionPlanCarriere"
+						value="#{planCarriereForm.textInputPlanCarriereDesc}" /> -->
+
+					<!-- <p:commandButton value="Annuler"
+						oncomplete="PF('popUpPlanCarriere').hide();" /> -->
+					<p:commandButton value="Ajouter plan carriere" onclick="#{planCarriereController.ajouter}" oncomplete="PF('popUpPlanCarriere').hide();" />
+				</p:panelGrid>
+			</p:dialog>
+			
+			<p:dialog header="Plan de Carriere Existant"
+				widgetVar="popUpPlanCarriereExistant" minHeight="500" minWidth="500"
+				showEffect="fade" modal="true" id="dialogPlanCarriereExistant">
+				<p:panelGrid id="eventDetails2" columns="2">
+					<p:outputLabel for="groupNomPc" value="Nom : " />
+					<p:selectOneMenu id="groupNomPc" required="true"
+					requiredMessage="Veuillez selectionner un nom de plan de carriere"
+					value="#{planCarriereForm.selectPlanCarriere}"
+					converter="entityConverter">
+					<f:selectItem itemLabel="Select type entretien : " />
+					<f:selectItems
+						value="#{planCarriereForm.toutPlanCarrieres}"
+						var="planCarriere" itemLabel="#{planCarriere.nom}"
+						itemValue="#{planCarriere}" />
+				</p:selectOneMenu>
+
+					
+					<p:commandButton value="Annuler"
+						oncomplete="PF('popUpPlanCarriere').hide();" />
+					<p:commandButton value="Enregistrer"
+						action="#{planCarriereController.ajouterExistantPlanCarriere}" />
+				</p:panelGrid>
+			</p:dialog>
+ 
+	 	<p:commandButton value="Annuler" action="#{entretienEvaluationAccueilController.redirection}" />
+	</h:form>
+</h:body>
+</html>

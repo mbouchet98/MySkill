@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<!-- On doit rajouter ces include pour que le calendrier puisse fonctionner -->
+	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+	<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
+
+	<!-- <link rel="stylesheet" media="screen" type="text/css"
+		href="./resources/css/bootstrap.css" />
+	<link rel="stylesheet" media="screen" type="text/css"
+		href="./resources/css/style.css" />
+	<link rel="stylesheet" media="screen" type="text/css"
+		href="./resources/css/font-awesome.min.css" />
+	<link rel="stylesheet" media="screen" type="text/css"
+		href="./resources/css/fullcalendar.css" />
+	<script src="./resources/js/bootstrap.min.js" /> -->
+
+	<title>Entretien Evaluation Accueil</title>
+</h:head>
+<h:body>
+	<h:form id="form2">
+		<!-- Calendrier -->
+		<p:panelGrid columns="3" layout="grid" columnClasses="ui-g-12 ui-md-6 ui-lg-3, ui-g-12 ui-md-6 ui-lg-6,  ui-g-12 ui-md-6 ui-lg-3"> 
+			<div></div> 
+			<p:schedule id="calendrierEntretien" value="#{entretienEvaluationAccueilForm.calendrierModel}" widgetVar="myEvent" view="timeGridWeek" locale="fr" styleClass="p-mt-4" scrollTime="06:00:00" minTime="06:00:00" maxTime="20:00:00" height="650px"> 
+				<p:ajax event="eventSelect" listener="#{entretienEvaluationAccueilController.afficherDetailEvent}" update="eventDetails" oncomplete="PF('planifier').show();"/> 
+			</p:schedule> 
+			<p:commandButton id="ajouterEntretien" value="Planifier" action="#{entretienEvaluationAccueilController.champsVide}" update="form2:dialog" process="@this" oncomplete="PF('planifier').show();"></p:commandButton>  		
+		</p:panelGrid> 
+
+		<!-- PopUp avec le formulaire -->
+		<p:dialog header="Planifier Entretien d'évaluation"
+			widgetVar="planifier" minHeight="500" minWidth="500"
+			showEffect="fade" modal="true" id="dialog">
+			<p:panelGrid id="eventDetails" columns="3">
+				<p:outputLabel for="heureDebut" value="Date de début : " />
+				<p:datePicker id="heureDebut" showTime="true" locale="fr"
+					value="#{entretienEvaluationAccueilController.dateDebut}"
+					pattern="dd.MM.yyyy"
+					validatorMessage="La date et l'heure de début doivent respecter ce format ex : '14.04.2021 15:23' "
+					requiredMessage="Veuillez saisir une date et un heure de début"
+					required="true">
+				</p:datePicker>
+				<p:message for="heureDebut" />
+
+				<p:outputLabel for="heureFin" value="Date de fin : " />
+				<p:datePicker id="heureFin" locale="fr"
+					value="#{entretienEvaluationAccueilController.dateFin}"
+					showTime="true" pattern="dd.MM.yyyy"
+					validatorMessage="La date et l'heure de début doivent respecter ce format ex : '14.04.2021 15:23' "
+					requiredMessage="Veuillez saisir une date et un heure de début"
+					required="true">
+				</p:datePicker>
+				<p:message for="heureFin" />
+
+				<p:outputLabel for="@next" value="Type Entretien Evaluation :" />
+				<p:selectOneMenu id="groupType" required="true"
+					requiredMessage="Veuillez selectionner un type d'entretien d'évaluation"
+					value="#{entretienEvaluationAccueilForm.typeEntretienEvaluation}"
+					converter="entityConverter">
+					<f:selectItem itemLabel="Select type entretien : " />
+					<f:selectItems
+						value="#{entretienEvaluationAccueilForm.typeEntretienEvaluations}"
+						var="typeEntretien" itemLabel="#{typeEntretien.libelle}"
+						itemValue="#{typeEntretien}" />
+				</p:selectOneMenu>
+				<p:message for="groupType" />
+
+				<p:outputLabel for="@next" value="Collaborateur :" />
+				<p:selectOneMenu id="groupMsk" required="true"
+					requiredMessage="Veuillez sélectionner un collaborateur"
+					value="#{entretienEvaluationAccueilForm.mskuser}"
+					converter="entityConverter" filter="true"
+					filterMatchMode="startsWith">
+					<f:selectItem itemLabel="Select collaborateur : " />
+
+					<f:selectItems value="#{entretienEvaluationAccueilForm.mskusers}"
+						var="mskuser" itemLabel="#{mskuser.firstName} #{mskuser.lastName}"
+						itemValue="#{mskuser}" />
+				</p:selectOneMenu>
+				<p:message for="groupMsk" />
+
+			</p:panelGrid>
+			<f:facet name="footer">
+				<p:commandButton value="Annuler"
+					oncomplete="PF('planifier').hide();" />
+				<p:commandButton value="Supprimer"
+					action="#{entretienEvaluationAccueilController.supprimerEntretienEvaluation}"
+					oncomplete="PF('planifier').hide();PF('myEvent').update();" />
+				<p:commandButton value="Détail"
+					action="#{entretienEvaluationAnnuelController.redirectionFormualaireEntretien(entretienEvaluationAccueilController.enEvaluation)}">
+				</p:commandButton>
+				<p:commandButton value="Enregistrer"
+					action="#{entretienEvaluationAccueilController.creerModifierEntretienEvaluation}"
+					update="eventDetails" />
+				<p:commandButton value="Plan de carrière" action="#{planCarriereController.redirectionPlanCarriere(entretienEvaluationAccueilController.enEvaluation)}"></p:commandButton>
+					
+			</f:facet>
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>

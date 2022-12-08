@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- The Basics -->
+
+  <groupId>gecko</groupId>
+
+  <artifactId>myskills</artifactId>
+
+  <version>3.0.0</version>
+
+  <packaging>pom</packaging>
+
+  <dependencies/>
+
+  <!--parent></parent-->
+
+  <!--dependencyManagement></dependencyManagement-->
+
+  <!--modules></modules-->
+
+  <properties>
+
+    <myskills.version>3.0.0</myskills.version>
+
+  </properties>
+
+  <!-- Build Settings -->
+
+  <!--build></build-->
+
+  <!--reporting></reporting-->
+
+  <!-- More Project Information -->
+
+  <name>MySkills</name>
+
+  <description>Elearning - Human Resources Platform</description>
+
+  <licenses>
+
+    <license>
+
+      <comments>Powered by GECKO SOFTWARE</comments>
+
+    </license>
+
+  </licenses>
+
+  <organization>
+
+    <name>GECKO SOFTWARE</name>
+
+    <url>http://publishing.bygecko.com</url>
+
+  </organization>
+
+
+  <!-- Environment Settings -->
+
+  <issueManagement>
+
+    <system>Trac</system>
+
+    <url>http://pic02.virtuel.gecko.fr/svn/myskills_v3/trunk</url>
+
+  </issueManagement>
+
+  <scm>
+
+    <connection>
+			http://www.MySkills.com/
+		</connection>
+
+  </scm>
+
+</project>

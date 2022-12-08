@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- The Basics -->
+	<groupId>gecko.com.gecko.jee.entreprise.myskills</groupId>
+	<artifactId>hrcomponent</artifactId>
+	<packaging>jar</packaging>
+	<parent>
+		<groupId>gecko.com.gecko.jee.entreprise</groupId>
+		<artifactId>myskills</artifactId>
+		<version>3.0.0</version>
+	</parent>
+
+	<!-- More Project Information -->
+	<name>
+		${project.groupId}.${project.artifactId}-${project.version}
+	</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>gecko.com.gecko.jee.entreprise.myskills</groupId>
+			<artifactId>hrpersistence</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>gecko.com.gecko.jee.enterprise.myskills</groupId> -->
+		<!-- <artifactId>hrpersistence</artifactId> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>gecko.com.gecko.jee.enterprise.myskills</groupId> -->
+		<!-- <artifactId>hrpresentation</artifactId> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.gecko.jee.enterprise.myskills</groupId> -->
+		<!-- <artifactId>business</artifactId> -->
+		<!-- <scope>provided</scope> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>javax.mail</groupId> -->
+		<!-- <artifactId>mail</artifactId> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>javax.transaction</groupId> -->
+		<!-- <artifactId>jta</artifactId> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.velocity</groupId> -->
+		<!-- <artifactId>velocity</artifactId> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+	</dependencies>
+</project>

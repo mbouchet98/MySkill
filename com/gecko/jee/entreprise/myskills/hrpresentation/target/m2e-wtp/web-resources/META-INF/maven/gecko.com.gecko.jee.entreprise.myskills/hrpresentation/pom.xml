@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- The Basics -->
+	<groupId>gecko.com.gecko.jee.entreprise.myskills</groupId>
+	<artifactId>hrpresentation</artifactId>
+	<packaging>war</packaging>
+	<parent>
+		<groupId>gecko.com.gecko.jee.entreprise</groupId>
+		<artifactId>myskills</artifactId>
+		<version>3.0.0</version>
+	</parent>
+	<!-- More Project Information -->
+	<name>
+		${project.groupId}.${project.artifactId}-${project.version}
+	</name>
+	<dependencies>
+		<dependency>
+			<groupId>gecko.com.gecko.jee.entreprise.myskills</groupId>
+			<artifactId>hrcomponent</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>gecko.com.gecko.jee.entreprise.myskills</groupId>
+			<artifactId>hrpersistence</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>javax.portlet</groupId> -->
+		<!-- <artifactId>portlet-api</artifactId> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>javax.servlet</groupId> -->
+		<!-- <artifactId>jsp-api</artifactId> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>net.sourceforge.jregex</groupId> -->
+		<!-- <artifactId>jregex</artifactId> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>xstream</groupId>
+			<artifactId>xstream</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<!-- JSF -->
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+		</dependency>
+	</dependencies>
+</project>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+  <!-- The Basics -->
+	<groupId>gecko.com.gecko.jee.entreprise.myskills</groupId>
+	<artifactId>hrpersistence</artifactId>
+	<packaging>jar</packaging>
+	<parent>
+		<groupId>gecko.com.gecko.jee.entreprise</groupId>
+		<artifactId>myskills</artifactId>
+		<version>3.0.0</version>
+	</parent>
+
+	<!-- More Project Information -->
+	<name>${project.groupId}.${project.artifactId}-${project.version}</name>
+	<description>${project.name} Maven Project</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>eclipselink</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>org.eclipse.persistence.jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>javax.persistence</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.persistence</groupId>
+      <artifactId>javax.persistence-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.spec.ee</groupId>
+      <artifactId>ow2-jta-1.1-spec</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+  </dependencies>
+
+
+</project>

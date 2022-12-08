@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<!-- On doit rajouter ces include pour que le calendrier puisse fonctionner -->
+	<h:outputScript library="primefaces" name="jquery/jquery.js"
+		target="head" />
+	<h:outputScript library="primefaces" name="jquery/jquery-plugins.js"
+		target="head" />
+
+<!-- 	<link rel="stylesheet" media="screen" type="text/css"
+		href="./resources/css/bootstrap.css" />
+	<link rel="stylesheet" media="screen" type="text/css"
+		href="./resources/css/style.css" />
+	<link rel="stylesheet" media="screen" type="text/css"
+		href="./resources/css/font-awesome.min.css" />
+	<link rel="stylesheet" media="screen" type="text/css"
+		href="./resources/css/fullcalendar.css" />
+	<script src="./resources/js/bootstrap.min.js" /> -->
+	<title>Entretien d'évaluation Annuel</title>
+</h:head>
+
+<body>
+	<h:form id="formAnnuel">
+
+		<h1>Entretien
+			#{entretienEvaluationAnnuelController.entretienEvaluation.typeEntretienEvaluation.libelle}
+			du
+			#{entretienEvaluationAnnuelController.entretienEvaluation.heureDebut}
+			de
+			#{entretienEvaluationAnnuelController.entretienEvaluation.mskuser.firstName}
+			#{entretienEvaluationAnnuelController.entretienEvaluation.mskuser.lastName}
+		</h1>
+		<p:panel>
+			<p:separator
+				style="height:10px;background:#FFFF !important;border:none;" />
+
+			<p:outputLabel for="compteRendu" value="Compte rendu : "
+				style="font-size:1.5em;" />
+			<p:textEditor widgetVar="editor1" id="compteRendu"
+				value="#{entretienEvaluationAnnuelForm.textEditor}" height="300"
+				required="true" requiredMessage="Le Compte Rendu doit être saisie"
+				secure="false" />
+			<p:message for="compteRendu" />
+
+			<p:separator
+				style="height:10px;background:#FFFF !important;border:none;" />
+
+			<p:outputLabel id="actionLabel" value="Action à mettre en oeuvre :  "
+				style="font-size:1.5em;" />
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Ajouter"
+						action="#{entretienEvaluationAnnuelController.viderChampsAction}"
+						update="formAnnuel:dialogAction" process="@this"
+						oncomplete="PF('popUpAction').show();" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:dataTable id="entretienEvaluationActions"
+				var="entretienEvaluationAction"
+				value="#{entretienEvaluationAnnuelForm.entretienEvaluationActions}"
+				rowKey="#{entretienEvaluationAction.idEntretienEvaluationAction}"
+				paginator="true" rows="10" rowSelectMode="add"
+				paginatorPosition="bottom">
+				<p:column headerText="Description Action">
+					<h:outputText value="#{entretienEvaluationAction.description}" />
+				</p:column>
+				<p:column headerText="Date limite">
+					<h:outputText value="#{entretienEvaluationAction.dateLimite}" />
+				</p:column>
+				<p:column headerText="Statut">
+					<h:outputText value="#{entretienEvaluationAction.statut}" />
+				</p:column>
+				<p:column exportable="false">
+					<p:commandButton value="Modifier"
+						action="#{entretienEvaluationAnnuelController.modifierEntretienEvaluationAction(entretienEvaluationAction)}"
+						update="formAnnuel:dialogAction" process="@this"
+						oncomplete="PF('popUpAction').show();" />
+					<p:commandButton value="Supprimer"
+						action="#{entretienEvaluationAnnuelController.supprimerEntretienEvaluationAction(entretienEvaluationAction)}"
+						update="formAnnuel:entretienEvaluationActions" />
+				</p:column>
+			</p:dataTable>
+			<p:dialog header="Action d'entretien d'évaluation"
+				widgetVar="popUpAction" minHeight="500" minWidth="500"
+				showEffect="fade" modal="true" id="dialogAction">
+				<p:panelGrid id="eventDetails" columns="2">
+					<p:outputLabel for="decriptionAction" value="Description : " />
+					<p:inputText id="decriptionAction"
+						value="#{entretienEvaluationAnnuelForm.textInputActionDesc}" />
+
+
+					<p:outputLabel for="dateLimiteAction" value="Date limite : " />
+					<p:datePicker id="dateLimiteAction" showTime="true" locale="fr"
+						value="#{entretienEvaluationAnnuelController.dateLimite}"
+						pattern="dd.MM.yyyy" />
+
+					<p:outputLabel for="radioStatutAction" value="Statut : " />
+					<p:selectOneRadio id="radioStatutAction"
+						value="#{entretienEvaluationAnnuelForm.radioStatutAction}" 
+						unselectable="true">
+						<f:selectItem itemLabel="Annuler" itemValue="Annuler" />
+						<f:selectItem itemLabel="En Cours" itemValue="En Cours" />
+						<f:selectItem itemLabel="Terminer" itemValue="Terminer" />
+						<f:selectItem itemLabel="A valider" itemValue="A valider" />
+					</p:selectOneRadio>
+
+					<p:commandButton value="Annuler"
+						oncomplete="PF('popUpAction').hide();" />
+					<p:commandButton value="Enregistrer"
+						action="#{entretienEvaluationAnnuelController.ajouterEntretienEvaluationAction}" />
+				</p:panelGrid>
+			</p:dialog>
+
+			<p:separator
+				style="height:20px;background:#FFFF !important;border:none;" />
+
+
+			<p:commandButton value="Annuler"
+				action="#{entretienEvaluationAccueilController.redirection}" />
+			<p:commandButton value="Enregistrer"
+				action="#{entretienEvaluationAnnuelController.creerModifierEntretienEvaluation}" />
+		</p:panel>
+	</h:form>
+</body>
+
+</html>
